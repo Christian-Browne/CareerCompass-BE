@@ -3,6 +3,7 @@ package app.tracker.jobapplicatontracker.Controller;
 import app.tracker.jobapplicatontracker.Entity.Job;
 import app.tracker.jobapplicatontracker.Entity.JobIntroInfo;
 import app.tracker.jobapplicatontracker.Service.JobServiceImpl;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class JobTrackerController {
     }
 
     @PostMapping("/job/add")
-    public ResponseEntity<Job> addJob(@RequestBody Job job) {
+    public ResponseEntity<Job> addJob(@RequestBody @Valid Job job) {
         return new ResponseEntity<>(jobServiceImpl.saveJob(job), HttpStatus.CREATED);
     }
 }

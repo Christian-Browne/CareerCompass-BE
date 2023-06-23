@@ -2,12 +2,10 @@ package app.tracker.jobapplicatontracker.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -22,12 +20,16 @@ public class Job {
     @Column(name = "id")
     private Long id;
 
+    @NotBlank(message = "must enter a title")
+    @NotNull
     @Column(name = "title")
     private String title;
 
     @Column(name = "logo")
     private String logo;
 
+    @NotBlank(message = "please enter a company")
+    @NotNull
     @Column(name = "company")
     private String company;
 
