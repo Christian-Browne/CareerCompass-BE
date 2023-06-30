@@ -22,13 +22,24 @@ public class JobTrackerController {
         return new ResponseEntity<>(jobServiceImpl.getAllJobs(), HttpStatus.OK);
     }
 
+    @PostMapping("/job/add")
+    public ResponseEntity<Job> addJob(@RequestBody @Valid Job job) {
+        return new ResponseEntity<>(jobServiceImpl.saveJob(job), HttpStatus.CREATED);
+    }
+
     @GetMapping("/job/{id}")
     public ResponseEntity<Job> getJob(@PathVariable Long id) {
         return new ResponseEntity<>(jobServiceImpl.getJob(id), HttpStatus.OK);
     }
 
-    @PostMapping("/job/add")
-    public ResponseEntity<Job> addJob(@RequestBody @Valid Job job) {
-        return new ResponseEntity<>(jobServiceImpl.saveJob(job), HttpStatus.CREATED);
+    @DeleteMapping("job/{id}/delete")
+    public ResponseEntity<HttpStatus> deleteJob(@PathVariable Long id) {
+        jobServiceImpl.deleteJob(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("job/{id}/update")
+    public ResponseEntity<Job> updateJob(@RequestBody Job job, @PathVariable Long id) {
+        return new ResponseEntity<>(jobServiceImpl.updateJob(job, id), HttpStatus.CREATED);
     }
 }

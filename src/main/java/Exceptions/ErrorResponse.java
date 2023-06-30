@@ -1,17 +1,35 @@
 package Exceptions;
 
-import org.springframework.http.HttpStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ErrorResponse {
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    LocalDateTime timestamp;
     private ArrayList<String> messages = new ArrayList<>();
     private long status;
 
     public ErrorResponse(String message, long status) {
+        this.timestamp = LocalDateTime.now();
         this.messages.add(message);
         this.status = status;
+    }
+    public ErrorResponse(ArrayList<String> errors, long status) {
+        this.timestamp = LocalDateTime.now();
+        this.messages = errors;
+        this.status = status;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime time) {
+        this.timestamp = time;
     }
 
     public ArrayList<String> getMessages() {

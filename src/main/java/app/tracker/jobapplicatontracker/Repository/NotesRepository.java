@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NotesRepository extends CrudRepository<Notes, Long> {
+    void deleteByJobId(Long id);
 }
