@@ -12,9 +12,4 @@ public class JobApplicatonTrackerApplication {
         SpringApplication.run(JobApplicatonTrackerApplication.class, args);
     }
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 }

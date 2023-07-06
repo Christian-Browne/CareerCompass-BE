@@ -1,7 +1,8 @@
-package app.tracker.jobapplicatontracker.User;
+package app.tracker.jobapplicatontracker.Security.User;
 
+import app.tracker.jobapplicatontracker.Entity.Job;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,25 +11,29 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Entity
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
 @Table(name = "users")
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private Integer id;
 
-    @Column(nullable = false, unique = true)
-    private String userName;
+    private String firstname;
 
-    @NotBlank(message = "password can't be blank")
-    @NonNull
-    @Column(nullable = false)
+    private String lastname;
+
+    private String email;
+
     private String password;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Job> job;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -39,8 +44,13 @@ public class User implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
     public String getUsername() {
-        return userName;
+        return email;
     }
 
     @Override
@@ -60,6 +70,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

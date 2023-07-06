@@ -1,5 +1,6 @@
 package app.tracker.jobapplicatontracker.Entity;
 
+import app.tracker.jobapplicatontracker.Security.User.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -57,4 +58,9 @@ public class Job {
     @JsonIgnore
     @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     List<Notes> notes;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }
