@@ -23,6 +23,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
+//    @Override
+//    protected boolean shouldNotFilter(
+//            @NonNull HttpServletRequest request
+//    ) throws ServletException {
+//        return request.getServletPath().equals(SecurityConstants.DEMO_PATH);
+//    }
+
+
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,

@@ -28,8 +28,20 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests((authorize) -> authorize
-                    .requestMatchers(HttpMethod.POST, SecurityConstants.REGISTER_PATH, SecurityConstants.AUTH_PATH).permitAll()
-                    .requestMatchers(SecurityConstants.REGISTER_PATH, SecurityConstants.AUTH_PATH).permitAll()
+                    .requestMatchers(
+                            HttpMethod.POST,
+                            SecurityConstants.REGISTER_PATH,
+                            SecurityConstants.AUTH_PATH
+                    ).permitAll()
+                    .requestMatchers(
+                            HttpMethod.GET,
+                            SecurityConstants.REGISTER_PATH,
+                            SecurityConstants.AUTH_PATH,
+                            SecurityConstants.DEMO_PATH,
+                            SecurityConstants.OPEN_API_PATH,
+                            SecurityConstants.SWAGGER_PATH,
+                            SecurityConstants.SWAGGER2_PATH
+                    ).permitAll()
                     .anyRequest().authenticated()
             )
             .sessionManagement((session) ->
