@@ -1,0 +1,5 @@
+#TODO: Add connections to aws database in here
+#TODO: Use environmnet variables here then add them to here on aws side
+
+jwt:
+  key: ${JWT_KEY}

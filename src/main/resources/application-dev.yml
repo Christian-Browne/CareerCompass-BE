@@ -1,11 +1,19 @@
+server:
+  port: 8080
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-  jpa:
+    username: postgres
+    password: password
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+  docker:
+    compose:
+      file: docker-compose.yml
+
+jwt:
+  key: GrdQFuORqJSTPsJgqNul8spLQ61MvEX8ueJS7dofRbw0wRKivATrwdkKfh0b9EhA
