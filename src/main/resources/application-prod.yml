@@ -4,6 +4,12 @@ spring:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: lazy
+  main:
+    lazy-initialization: true
 
 #TODO: Use environmnet variables here then add them to here on aws side
 jwt:
