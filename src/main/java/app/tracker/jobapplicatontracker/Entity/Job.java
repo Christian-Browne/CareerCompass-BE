@@ -63,4 +63,28 @@ public class Job {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    public enum Color {
+        RED("FFC1C1"),
+        YELLOW("FFFFB3"),
+        PURPLE("B2A2C7"),
+        ORANGE("FFDAB9"),
+        PINK("FFB6C1"),
+        TEAL("99CCCC"),
+        BLUE("A2D5F2");
+
+        private final String code;
+
+        Color(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
+    }
+
+    @Column(name = "color")
+    @Enumerated(EnumType.STRING)
+    private Color color;
 }

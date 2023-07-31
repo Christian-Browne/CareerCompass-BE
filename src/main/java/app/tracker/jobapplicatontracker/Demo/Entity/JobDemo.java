@@ -1,11 +1,13 @@
 package app.tracker.jobapplicatontracker.Demo.Entity;
 
+import app.tracker.jobapplicatontracker.Entity.Job;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.awt.*;
 import java.util.List;
 
 @Entity
@@ -51,10 +53,35 @@ public class JobDemo {
     @Column(name = "post_url")
     private String postUrl;
 
+
     // Doesn't make a separate column that stores the notes
     // JPA handles retrieving the notes from a different table
     // just use getNotes() to retrieve the notes
     @JsonIgnore
     @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     List<NotesDemo> notes;
+
+    public enum Color {
+        RED("FFC1C1"),
+        YELLOW("FFFFB3"),
+        PURPLE("B2A2C7"),
+        ORANGE("FFDAB9"),
+        PINK("FFB6C1"),
+        TEAL("99CCCC"),
+        BLUE("A2D5F2");
+
+        private final String code;
+
+        Color(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
+    }
+
+    @Column(name = "color")
+    @Enumerated(EnumType.STRING)
+    private Color color;
 }
