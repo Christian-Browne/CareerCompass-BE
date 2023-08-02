@@ -62,13 +62,11 @@ public class JobDemo {
     List<NotesDemo> notes;
 
     public enum Color {
-        RED("FFC1C1"),
-        YELLOW("FFFFB3"),
-        PURPLE("B2A2C7"),
-        ORANGE("FFDAB9"),
-        PINK("FFB6C1"),
-        TEAL("99CCCC"),
-        BLUE("A2D5F2");
+        RED("E3371E"),
+        BLACK("151F30"),
+        ORANGE("FF7A48"),
+        TEAL("0593A2"),
+        BLUE("103778");
 
         private final String code;
 
