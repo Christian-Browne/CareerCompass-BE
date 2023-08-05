@@ -1,5 +1,6 @@
 package app.tracker.jobapplicatontracker.Security.Auth;
 
+import Exceptions.JWTTokenExpiredException;
 import app.tracker.jobapplicatontracker.Security.Auth.Entity.AuthRequest;
 import app.tracker.jobapplicatontracker.Security.Auth.Entity.AuthResponse;
 import app.tracker.jobapplicatontracker.Security.Auth.Entity.RegisterRequest;
@@ -44,9 +45,15 @@ public class AuthService {
                         request.getPassword()
                 )
         );
+
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
+
+        if (jwtService.isTokenExpired(jwtToken)) {
+            throw new JWTTokenExpiredException();
+        }
+
         return AuthResponse.builder()
                 .token(jwtToken)
                 .build();

@@ -36,6 +36,12 @@ public class AppExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(JWTTokenExpiredException.class)
+    public ResponseEntity<Object>  jwtTokenExpiredException(JWTTokenExpiredException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), 401);
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
         ArrayList<String> errors = new ArrayList<>();
@@ -47,4 +53,5 @@ public class AppExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(errors, 400);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
+
 }
