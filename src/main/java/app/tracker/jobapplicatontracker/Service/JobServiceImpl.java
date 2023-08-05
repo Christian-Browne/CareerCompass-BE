@@ -55,12 +55,10 @@ public class JobServiceImpl implements JobService {
     public List<Job> getAllJobs(Principal principal) {
         String email = principal.getName();
         Optional<User> user = userRepository.findByEmail(email);
-        if (user.isPresent()) {
-            return user.get().getJob();
-        } else {
-            throw new UsernameNotFoundException("User doesn't exist");
-        }
-//        return jobRepository.findAllProjectedByOrderById();
+        if(user.isEmpty()) throw new UsernameNotFoundException("user doesn't Exist");
+
+        Integer userId = user.get().getId();
+        return jobRepository.findAllByUserIdOrderById(userId);
     }
 
     @Override

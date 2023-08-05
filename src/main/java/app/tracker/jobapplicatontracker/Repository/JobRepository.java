@@ -7,5 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface JobRepository extends CrudRepository<Job, Long> {
-    List<JobIntroInfo> findAllProjectedByOrderById();
+//    List<JobIntroInfo> findAllProjectedByOrderById();
+    List<Job> findAllByUserIdOrderById(Integer userId);
 }

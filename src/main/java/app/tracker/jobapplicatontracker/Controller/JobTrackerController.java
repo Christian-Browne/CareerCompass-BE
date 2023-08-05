@@ -19,7 +19,7 @@ public class JobTrackerController {
 
     private final JobServiceImpl jobServiceImpl;
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public ResponseEntity<List<Job>> getAllJobs(Principal principal) {
         return new ResponseEntity<>(jobServiceImpl.getAllJobs(principal), HttpStatus.OK);
     }
