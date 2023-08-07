@@ -1,5 +1,6 @@
 package app.tracker.jobapplicatontracker.Security.Config;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,13 +24,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
-//    @Override
-//    protected boolean shouldNotFilter(
-//            @NonNull HttpServletRequest request
-//    ) throws ServletException {
-//        return request.getServletPath().equals(SecurityConstants.DEMO_PATH);
-//    }
-
 
     @Override
     protected void doFilterInternal(
@@ -37,6 +31,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+        // Add CORS headers to the response
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE");
+        response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
@@ -47,6 +47,25 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         jwt = authHeader.substring(7);
+
+        try {
+            if (jwtService.isTokenExpired(jwt)) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setContentType("application/json");
+                String jsonBody = String.format("{\"code\": %d, \"message\": \"%s\"}", 401, "Token Expired");
+                response.getWriter().write(jsonBody);
+                response.flushBuffer();
+                return;
+            }
+        } catch (ExpiredJwtException ex) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            String jsonBody = String.format("{\"code\": %d, \"message\": \"%s\"}", 401, "Token Expired");
+            response.getWriter().write(jsonBody);
+            response.flushBuffer();
+            return;
+        }
+
         userEmail = jwtService.extractUsername(jwt);
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
