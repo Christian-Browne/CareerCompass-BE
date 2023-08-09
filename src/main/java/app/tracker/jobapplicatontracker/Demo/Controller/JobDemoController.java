@@ -20,4 +20,9 @@ public class JobDemoController {
     public ResponseEntity<List<JobDemo>> getAllJobs() {
         return new ResponseEntity<>(jobServiceImpl.getAllJobs(), HttpStatus.OK);
     }
+
+    @GetMapping("/demo/job/{id}")
+    public ResponseEntity<JobDemo> getJob(@PathVariable Long id) {
+        return new ResponseEntity<>(jobServiceImpl.getJob(id), HttpStatus.OK);
+    }
 }

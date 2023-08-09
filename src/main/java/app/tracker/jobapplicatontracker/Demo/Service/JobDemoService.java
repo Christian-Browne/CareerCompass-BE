@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface JobDemoService {
     List<JobDemo> getAllJobs();
+    JobDemo getJob(Long id);
 
 }

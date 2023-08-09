@@ -38,6 +38,7 @@ public class SecurityConfig {
                             SecurityConstants.REGISTER_PATH,
                             SecurityConstants.AUTH_PATH,
                             SecurityConstants.DEMO_PATH,
+                            SecurityConstants.DEMO_PATH_UPDATE_JOB_PATH,
                             SecurityConstants.OPEN_API_PATH,
                             SecurityConstants.SWAGGER_PATH,
                             SecurityConstants.SWAGGER2_PATH

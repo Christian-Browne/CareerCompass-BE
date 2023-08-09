@@ -101,6 +101,7 @@ public class JobServiceImpl implements JobService {
                 unwrapped.setSalary(job.getSalary());
                 unwrapped.setStatus(job.getStatus());
                 unwrapped.setColor(job.getColor());
+                unwrapped.setPostUrl(job.getPostUrl());
                 return jobRepository.save(unwrapped);
             } else {
                 throw new JobNotFoundException(id);

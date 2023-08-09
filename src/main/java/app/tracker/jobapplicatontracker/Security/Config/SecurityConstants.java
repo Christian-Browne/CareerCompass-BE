@@ -4,6 +4,7 @@ public class SecurityConstants {
     public static final String REGISTER_PATH = "/register";
     public static final String AUTH_PATH = "/auth";
     public static final String DEMO_PATH = "/demo";
+    public static final String DEMO_PATH_UPDATE_JOB_PATH = "/demo/job/{id}";
     public static final String REFRESH_PATH = "/refresh-token";
     public static final String OPEN_API_PATH = "/v3/api-docs/**";
     public static final String SWAGGER_PATH = "/swagger-ui/**";
