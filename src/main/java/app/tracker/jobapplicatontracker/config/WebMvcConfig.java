@@ -10,7 +10,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173")
+                .allowedOrigins("https://www.careercompassapp.com", "http://localhost:5173")
                 .allowedMethods("GET", "POST", "DELETE")
                 .allowedHeaders("Authorization", "Content-Type", "Accept")
                 .allowCredentials(true);
